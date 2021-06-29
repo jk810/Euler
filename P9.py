@@ -1,18 +1,14 @@
-#%% Project Euler Problem 9
-# Justin Kim
-# Pythag triplet: a^2 + b^2 = c^2. Find triplet such that a + b + c = 1000
+ar = range(1, 333)
+br = range(2, 500)
+cr = range(335, 997)
 
-import time
-start = time.time()
-
-import numpy as np
-
-for b in range(1000):
-    for a in range(1000):
-        c = (a**2 + b**2)**.5
-        if (c).is_integer() and a < b < c and a + b + c == 1000:
-            pythagtrip = np.array([a, b, c])
-
-ans = np.product(pythagtrip)
-
-elapsed = time.time() - start
+t = False
+for i in ar:
+    for j in br:
+        for k in cr:
+            if i + j + k == 1000 and i**2 + j**2 == k**2:
+                t = True
+                a = i
+                b = j
+                c = k
+print(a*b*c)

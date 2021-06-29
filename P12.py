@@ -1,38 +1,42 @@
-#%% Project Euler Problem 12
-# Justin Kim
-# 1st triangle number to have >500 divisors
+def nth_tri(n):
+    # nth = 0
+    # for i in range(n + 1):
+    #     nth += i
+    # return nth
+    nth = n*(n + 1)/2
+    return nth
 
-import time
-start_time = time.time()
-
-from itertools import groupby
-import numpy as np
-
-
-def primeFactorization(n):
-    List = []
+def prime_factors(n):
+    pfs = []
     i = 2
-    while i*i <= n:     # Smallest prime factor <= sqrt(n) unless n is prime
-        if n % i == 0:
-            n /= i
-            List.append(i)
-        else:
+    while i * i <= n:
+        if n % i != 0:
             i += 1
-    List.append(n)
-    return List
+        else:
+            n //= i
+            pfs.append(i)
+    pfs.append(n)
+    return pfs
 
+def alphas(n):
+    pfs = prime_factors(n)
+    a = []
+    uni = set(pfs)
+    for i in uni:
+        a.append(pfs.count(i))
+    return a
 
-numFac = 0
-n = 1
-while numFac < 500:
-    tNumber = n*(n + 1)/2
-    primeList = primeFactorization(tNumber)
-    frequencyList = [len(list(group)) for key, group in groupby(primeList)]
-    newFrequencyList = [x + 1 for x in frequencyList]
+def ndivs(n):
+    ndivs = 1
+    aa = alphas(n)
+    for i in aa:
+        ndivs *= (i + 1)
+    return ndivs
 
-    numFac = np.product(newFrequencyList)
-    n += 1
-
-answer = tNumber
-
-elapsed_time = time.time() - start_time
+c = 1
+b = 1
+while b < 500:
+    nth = nth_tri(c)
+    b = ndivs(nth)
+    c += 1
+print(nth)

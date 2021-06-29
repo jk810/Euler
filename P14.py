@@ -1,26 +1,14 @@
-#%% Project Euler Problem 14
-# Justin Kim
-# Longest Collatz sequence from a starting number < 1000000
-
-import time
-start_time = time.perf_counter()
-def collatz(n):
-    count = 1
-    while n > 1:
-        if n % 2 == 0:
-            n /= 2
-            count += 1
+d = 2
+for n in range(2, 1000000):
+    c = [n]
+    a = c[-1]
+    while a != 1:
+        if a % 2 == 0:
+            a /= 2
+            c.append(a)
         else:
-            n = 3 * n + 1
-            count += 1
-    return count
-
-count = 1
-
-for i in range(800000, 1000000):
-    if count < collatz(i):
-        count = collatz(i)
-        a = i
-
-
-elapsed_time = time.perf_counter() - start_time
+            a = 3*a + 1
+            c.append(a)
+    if len(c) > d:
+        d = len(c)
+        print(n)

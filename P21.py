@@ -1,25 +1,16 @@
-# Project Euler Problem 21
-# Justin Kim
-# Amicable numbers
-
-import time
-import math
-
-start = time.perf_counter()
-
-def spd(n):
-    s = 0
-    for i in range(1, math.ceil(n/2) + 1):
+def sum_divisors(n):
+    c = 0
+    for i in range(1,n//2 + 1):
         if n % i == 0:
-            s += i
-    return s
+            c += i
+    return c
 
-ans = 0
-for i in range(200, 10000):
-    x = spd(i)
-    y = spd(x)
-    if i == y and i != x:
-        ans += i
+amic = []
+for a in range(1, 10000):
+    b = sum_divisors(a)
+    if a == sum_divisors(b) and a != b:
+        if a not in amic:
+         amic.append(a)
 
-
-elapsed = time.perf_counter() - start
+print(amic)
+print(sum(amic))

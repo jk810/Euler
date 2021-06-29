@@ -1,15 +1,5 @@
-#%% Project Euler Problem 6
-# Justin Kim
-# Difference between the square of the sum and the sum of the squares
+import numpy as np
 
-def problem6(n):
-    sumsq = 0
-    sqsum = 0
-    for i in range(n + 1):
-        sumsq += i**2
-        sqsum += i
-    sqsum *= sqsum
-    ans = sqsum - sumsq
-    return ans
-
-ans = problem6(100)
+a = np.arange(1, 101)
+b = sum(a**2) - sum(a)**2
+print(b)

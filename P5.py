@@ -1,24 +1,16 @@
-#%% Project Euler Problem 5
-# Justin Kim
-# Smallest positive number that is evenly divisible by numbers 1-20
+import math
+import numpy as np
 
-import time
-start_time = time.time()
+a = math.factorial(20)
+b = np.arange(1, 21)
 
-a = 4849845         # product of all primes between 1-20
-test = [0] * 20
-trigger = False
+d = 2*3*5*7*11*13*17*19
 
-while trigger == False:
-    for j in range(1, 21):
-        if a % j == 0:
-            test[j - 1] = 1
-            if all(m == 1 for m in test):
-                trigger = True
-        else:
-            test[j-1] = 0
-            a += 4849845
-            break   # restart for loop while maintaining value of a
-
-elapsed = time.time() - start_time
-
+k = 1
+while d < a:
+    d *= k
+    c = d % b
+    if all(j == 0 for j in c):
+        print(d)
+        break
+    else: k += 1

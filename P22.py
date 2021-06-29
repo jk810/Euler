@@ -1,31 +1,17 @@
-# Project Euler Problem 22
-# Justin Kim
-# Name scores
+with open(r"\Users\JK31434\Desktop\Python docs\Project Euler\p22_names.txt") as f:
+    names = sorted(f.read().replace('"', '').split(','))
+f.closed
 
-import time
-start = time.perf_counter()
+ts = 0
+alph = 'abcdefghijklmnopqrstuvwxyz'
+alphnum ={}
+for i, l in enumerate(alph):
+    alphnum[l] = i + 1
 
-f = open('p022_names.txt')
+for i, n in enumerate(names):
+    s = 0
+    for j in n:
+        s += alphnum[j.lower()]
+    ts += (i + 1)*s
 
-names = sorted(f.read().replace('"', '').split(','))
-
-alphabet = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
-            'I': 9, 'J': 10, 'K': 11, 'L': 12, 'M': 13, 'N': 14, 'O': 15,
-            'P': 16, 'Q': 17, 'R': 18, 'S': 19, 'T': 20, 'U': 21, 'V': 22,
-            'W': 23, 'X': 24, 'Y': 25, 'Z': 26}
-
-digit_names = []
-
-for i in range(len(names)):
-    temp = 0
-    for j in names[i]:
-        temp += alphabet[j]
-    digit_names.append(temp)
-    digit_names[i] *= (i + 1)
-
-ans = sum(x for x in digit_names)
-
-elapsed = time.perf_counter() - start
-
-print(ans)
-print(names)
+print(ts)

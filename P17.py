@@ -1,51 +1,37 @@
-# Project Euler Problem 17
-# Justin Kim
-# How many letters in spelling out numbers 1-1000
-# SHORT LIBRARY WAY: NUM2WORD OR INFLECT
+one = 3
+two = 3
+three = 5
+four = 4
+five = 4
+six = 3
+seven = 5
+eight = 5
+nine = 4
+ten = 3
+eleven = 6
+twelve = 6
+thirteen = 8
+fourteen = 8
+fifteen = 7
+sixteen = 7
+seventeen = 9
+eighteen = 8
+nineteen = 8
+twenty = 6
+thirty = 6
+forty = 5
+fifty = 5
+sixty = 5
+seventy = 7
+eighty = 6
+ninety = 6
+hundred = 7
+a = 3
+thousand = 8
 
-import time
-start_time = time.perf_counter()
-
-
-by_one = ["one", "two", "three", "four", "five", "six", "seven", "eight",
-          "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-          "sixteen", "seventeen", "eighteen", "nineteen"]
-
-by_ten = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
-          "ninety"]
-
-def spell_number(n):
-    if n <= 19:
-        return by_one[n - 1]
-    elif 20 <= n <= 99:
-        if n % 10 == 0:
-            return by_ten[int(str(n)[0]) - 2]
-        else:
-            return by_ten[int(str(n)[0]) - 2] + "-" + by_one[int(str(n)[1]) - 1]
-    elif 100 <= n <= 999:
-        if str(n)[1] == "0" and str(n)[2] == "0":
-            return by_one[int(str(n)[0]) - 1] + " hundred"
-        elif str(n)[1] == "0":
-            return by_one[int(str(n)[0]) - 1] + " hundred and " + by_one[int(str(n)[2]) - 1]
-        elif str(n)[2] == "0" and str(n)[1] == "1":
-            return by_one[int(str(n)[0]) - 1] + " hundred and " + by_one[9]
-        elif str(n)[2] == "0":
-            return by_one[int(str(n)[0]) - 1] + " hundred and " + by_ten[int(str(n)[1]) - 2]
-        elif str(n)[1] == "1":
-            return by_one[int(str(n)[0]) - 1] + " hundred and "+ by_one[int(str(n)[2]) + 9]
-        else:
-            return by_one[int(str(n)[0]) - 1] + " hundred and " + by_ten[int(str(n)[1]) - 2] + "-" + by_one[int(str(n)[2]) - 1]
-    elif n == 1000:
-        return "one thousand"
-
-spelled = []
-ans = 0
-for i in range(1, 1001):
-    spelled.append(spell_number(i))
-    ans += sum(c != ' ' for c in spelled[i - 1])
-    ans -= sum(c == '-' for c in spelled[i - 1])
-
-elapsed_time = time.perf_counter() - start_time
-
+b = one + two + three + four + five + six + seven + eight + nine
+teens = ten + eleven + twelve + thirteen + fourteen + fifteen + sixteen + seventeen + eighteen + nineteen
+ts = twenty + thirty + forty + fifty + sixty + seventy + eighty + ninety
+f99 = 9*b + teens + ts*10
+ans = (one + thousand) + 10*f99 + (b + 9*hundred) + 99*b + (hundred + a)*99*9
 print(ans)
-asdf = 30

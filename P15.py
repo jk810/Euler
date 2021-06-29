@@ -1,17 +1,11 @@
-# Project Euler Problem 15
-# Justin Kim
-# 20x20 lattice paths moving right or down
+# in an nxn grid you have to move n times right and n times down
+# total 2n moves: if you could go in any order, thre would be (2n)! routes
+# but only moving right and down, it is 2n choose n:
 
 import math
 
-def nCk(n,k):
-    f = math.factorial
-    return f(n) / f(k) / f(n - k)
+def lattice_paths(n):
+    n_fact = math.factorial(n)
+    return math.factorial(2 * n) / n_fact / n_fact
 
-# Any path from top left to bottom right consists of n steps right, 
-# n steps down. So from 2n steps, we choose n, giving 2nCn
-
-n = 20
-n_paths = int(nCk(2*n,n))
-
-print(n_paths)
+print(lattice_paths(20))

@@ -1,51 +1,21 @@
-# Project Euler Problem 19
-# Justin Kim
-# Counting Sundays
+d_in_m = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-import time
-import numpy as np
-start = time.perf_counter()
+date_list = []
 
-calendar = np.array([])
-
-jan = np.arange(1,32)
-feb = np.arange(1,29)
-leapfeb = np.arange(1,30)
-mar = np.arange(1,32)
-apr = np.arange(1,31)
-may = np.arange(1,32)
-jun = np.arange(1,31)
-jul = np.arange(1,32)
-aug = np.arange(1,32)
-sep = np.arange(1,31)
-octo = np.arange(1,32)
-nov = np.arange(1,31)
-dec = np.arange(1,32)
-
-for i in range(0, 101):
-    if i == 0:
-        calendar = np.hstack((jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec))
-    elif i % 4 == 0:
-        calendar = np.hstack((calendar, jan, leapfeb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec))
+for i in range(1900, 2001):
+    if i % 4 == 0 and i != 1900:
+        d_in_m[1] = 29
     else:
-        calendar = np.hstack((calendar, jan,feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec))
+        d_in_m[1] = 28
+    for j in d_in_m:
+        for k in range(j):
+            date_list.append(k + 1)
 
-count = 0
-for i in range(370,36891,7):
-    if calendar[i] == 1:
-        count += 1
+index_1st = [i for i, d in enumerate(date_list) if d == 1 and i > 365]
 
+c = 0
+for i in index_1st:
+    if i % 7 == 6:
+         c += 1
 
-
-
-import datetime
-sundays = 0
-for y in range(1901,2001):
-	for m in range (1,13):
-		d = datetime.date(y,m,1)
-		if d.weekday() == 6: sundays += 1
-
-# from datatime import date
-# sum(date(y, m, 1).weekday() == 6 for y in range(1901, 2001) for m in range(1, 13))
-print(sundays)
-elapsed = time.perf_counter() - start
+print(c)
